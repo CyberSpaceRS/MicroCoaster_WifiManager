@@ -243,9 +243,14 @@
     .switch{display:flex; align-items:center; gap:8px; font-size:14px; color:#e0e0e0}
     .hint{font-size:12px; color:var(--muted); margin:6px 0 0 0}
     .footer{
-      position:sticky; bottom:0; z-index:10;
-      padding:16px 0 0 0; margin-top:12px;
-      background:linear-gradient(180deg, rgba(26,26,26,0), rgba(26,26,26,1) 40%);
+      margin-top:12px;
+      background:none;
+      padding:0;
+    }
+    
+    .footer2{
+      margin-top: 24px; padding-top: 16px;
+      font-size: 12px; color: var(--muted);
     }
     .footer .btn.primary{width:100%}
     code{background:#0d1426; border:1px solid #223255; padding:2px 6px; border-radius:6px}
@@ -325,42 +330,42 @@
 
     <div class="card">
       <section class="sec">
-        <h2>Réseaux disponibles</h2>
+        <h2>Available networks</h2>
         <div class="toolbar">
           <input id="filter" class="input" type="search" placeholder="Filtrer SSID…" inputmode="search" />
-          <button id="btn-scan" class="btn" type="button">Actualiser</button>
+          <button id="btn-scan" class="btn" type="button">Update</button>
           <label class="switch">
             <input id="auto" type="checkbox" checked />
             <span id="autoTxt"></span>
           </label>
         </div>
-        <div id="status" class="hint" style="margin-top:8px">Recherche en cours…</div>
+        <div id="status" class="hint" style="margin-top:8px">Searching...</div>
         <ul id="list" class="list" aria-live="polite"></ul>
-        <div id="empty" class="hint" style="display:none">Aucun réseau trouvé. Essayez d'actualiser.</div>
+        <div id="empty" class="hint" style="display:none">No network found. Please try refreshing.</div>
       </section>
 
       <section class="sec">
-        <h2>Se connecter</h2>
+        <h2>Connect</h2>
         <form id="form" method="POST" action="/save" autocomplete="off">
           <div class="row">
             <label for="ssid">SSID</label>
-            <input id="ssid" class="input grow" name="ssid" required placeholder="Nom du réseau" />
+            <input id="ssid" class="input grow" name="ssid" required placeholder="Network name" />
           </div>
 
           <div class="row">
-            <label for="password">Mot de passe</label>
-            <input id="password" class="input grow" name="password" type="password" required minlength="8" placeholder="Mot de passe" />
+            <label for="password">Password</label>
+            <input id="password" class="input grow" name="password" type="password" required minlength="8" placeholder="Password" />
           </div>
 
           <div class="row">
             <label></label>
-            <label class="switch"><input id="show" type="checkbox" /> Afficher le mot de passe</label>
+            <label class="switch"><input id="show" type="checkbox" /> Show password</label>
           </div>
-
-          <p class="hint">Les identifiants sont sauvegardés sur l'appareil qui redémarre pour se connecter.</p>
-
+          <br>
+          <p class="hint">Credentials are saved on the device which reboots to connect.</p>
+          <br>
           <div class="footer">
-            <button id="btn-save" class="btn primary" type="submit">Sauvegarder et connecter</button>
+            <button id="btn-save" class="btn primary" type="submit">Save and connect</button>
           </div>
         </form>
       </section>
@@ -393,7 +398,6 @@
             Si le portail ne s'ouvre pas automatiquement, connectez-vous au point d'accès et allez à <code id="portal-url">http://192.168.4.1</code>.
           </div>
       </section>
-
     </div>
 
     <footer class="copyright">© 2025 MicroCoaster · <span id="ver-footer"></span></footer>
@@ -508,17 +512,17 @@
       async function scan(){
         try{
           els.btnScan.disabled=true;
-          els.status.textContent='Recherche en cours…';
+          els.status.textContent='Searching...';
           let resp = await fetch('/scan', {cache:'no-store'});
           if (!resp.ok) throw new Error('HTTP '+resp.status);
           let data = await resp.json();
           if (!Array.isArray(data)) data = (data && data.networks) || [];
           lastScan = data;
           render(lastScan);
-          els.status.textContent = `Terminé. ${lastScan.length} réseaux`;
+          els.status.textContent = `Done. ${lastScan.length} networks found.`;
         }catch(e){
           console.error(e);
-          els.status.textContent='Erreur lors de la recherche. Réessayez.';
+          els.status.textContent='An error occurred during the search. Please try again.';
         }finally{
           els.btnScan.disabled=false;
         }
@@ -548,7 +552,7 @@
 
       els.form.addEventListener('submit', ()=>{
         els.btnSave.disabled=true;
-        els.btnSave.textContent='Sauvegarde en cours…';
+        els.btnSave.textContent='Saving...';
       });
 
       // Avanzadas: habilitar BORRAR
@@ -577,7 +581,7 @@
             console.error(e);
             if (els.eraseMsg) els.eraseMsg.textContent = 'Erreur lors de la demande de suppression.';
             els.btnErase.disabled = false;
-            els.btnErase.textContent = '🗑️ Supprimer les identifiants et redémarrer';
+            els.btnErase.textContent = 'Supprimer les identifiants et redémarrer';
           }
         });
       }
@@ -586,7 +590,7 @@
         els.btnReload.addEventListener('click', ()=> location.reload());
       }
 
-      // Acordeón suave
+      // smooth accordion
       (function initAccordion(){
         const det = document.querySelector('details.accordion');
         if (!det) return;
@@ -627,7 +631,7 @@
         });
       })();
 
-      // Primer ciclo
+      // First cycle
       scan();
     })();
   </script>

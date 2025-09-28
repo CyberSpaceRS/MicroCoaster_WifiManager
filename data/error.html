@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Erreur de connexion - MicroCoaster</title>
+  <title>Connection Error - MicroCoaster</title>
   <link rel="icon" type="image/png" href="logo.png">
   <style>
     :root{
@@ -32,10 +32,10 @@
     }
     .logo{
       width:64px; height:64px; margin:0 auto 20px;
-      background: linear-gradient(135deg, rgba(32, 194, 106, 0.15), rgba(29, 182, 96, 0.1));
-      border:2px solid rgba(32, 194, 106, 0.4);
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 107, 107, 0.08));
+      border:2px solid #ff6b6b;
       border-radius:16px; display:grid; place-items:center;
-      box-shadow: 0 8px 24px rgba(32, 194, 106, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
     .logo-img{ width:48px; height:48px; object-fit:contain; border-radius:8px; }
     .error-icon{
@@ -62,7 +62,7 @@
       font-size: 14px; color: #e0e0e0;
     }
     .btn{
-      background: linear-gradient(135deg, #20c26a, #1db660);
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
       border: none;
       color: white;
       font-weight: 600;
@@ -74,12 +74,12 @@
       text-decoration: none;
       display: inline-block;
       margin-top: 16px;
-      box-shadow: 0 4px 12px rgba(32, 194, 106, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
     }
     .btn:hover{
-      background: linear-gradient(135deg, #2dd675, #20c26a);
+      background: linear-gradient(135deg, #ff8e8e, #ff6b6b);
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(32, 194, 106, 0.4);
+      box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
     }
     .footer{
       margin-top: 24px; padding-top: 16px;
@@ -114,24 +114,24 @@
       
       <div class="error-icon"></div>
       
-      <h1>Erreur de connexion</h1>
+  <h1>Connection Error</h1>
       
       <p class="message">
-        Impossible de se connecter au réseau Wi-Fi.<br>
-        Veuillez vérifier vos identifiants et réessayer.
+        Unable to connect to the Wi-Fi network.<br>
+        Please check your credentials and try again.
       </p>
       
       <div class="info">
-        <strong>Causes possibles :</strong><br>
-        • Mot de passe Wi-Fi incorrect<br>
-        • Réseau Wi-Fi hors de portée<br>
-        • Problème temporaire du réseau
+  <strong style="text-decoration:underline;">Possible causes:</strong><br>
+        • Incorrect Wi-Fi password<br>
+        • Wi-Fi network out of range<br>
+        • Temporary network issue
       </div>
       
-      <a href="/" class="btn">Réessayer</a>
+  <a href="/" class="btn">Retry</a>
       
       <div class="footer">
-        © 2025 MicroCoaster • Configuration Wi-Fi
+        © 2025 MicroCoaster • Wi-Fi Setup
       </div>
     </div>
   </div>
