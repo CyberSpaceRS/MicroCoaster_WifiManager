@@ -33,8 +33,8 @@ void setup() {
   
   // Configuration optionnelle
   Serial.println("🔧 Configuration avancée...");
-  wifi.setCaptivePortal(false); // Désactiver les redirections si préféré
-  Serial.println("   ├─ Portail captif: désactivé");
+  wifi.setCaptivePortal(true); // Activer les redirections pour portail captif
+  Serial.println("   ├─ Portail captif: activé");
   
   // Configuration hybride : première connexion + production
   wifi.setFallbackPolicy(AyresWiFiManager::FallbackPolicy::ON_FAIL);
